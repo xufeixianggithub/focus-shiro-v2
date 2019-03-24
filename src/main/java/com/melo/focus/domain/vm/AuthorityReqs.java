@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.melo.focus.domain.basic.Authority;
 
-public class AuthorityVMS {
+public class AuthorityReqs {
 
 	private String controller;
 	

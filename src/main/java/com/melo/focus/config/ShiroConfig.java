@@ -165,7 +165,7 @@ public class ShiroConfig {
 	  
 	       System.out.println("ShiroConfiguration.rememberMeManager()");  
 	       CookieRememberMeManager cookieRememberMeManager = new CookieRememberMeManager();  
-	      // cookieRememberMeManager.setCipherKey(org.apache.shiro.codec.Base64.decode("6ZmI6I2j5Y+R5aSn5ZOlAA=="));
+	       cookieRememberMeManager.setCipherKey(org.apache.shiro.codec.Base64.decode("6ZmI6I2j5Y+R5aSn5ZOlAA=="));
 	       cookieRememberMeManager.setCookie(rememberMeCookie());  
 	       return cookieRememberMeManager;  
 	}  

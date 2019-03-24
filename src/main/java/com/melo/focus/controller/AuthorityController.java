@@ -1,5 +1,6 @@
 package com.melo.focus.controller;
 
+import com.melo.focus.domain.vm.AuthorityUpdateReq;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
@@ -19,9 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.melo.focus.domain.basic.Authority;
-import com.melo.focus.domain.vm.AuthoritySaveVM;
-import com.melo.focus.domain.vm.AuthorityUpdateVM;
-import com.melo.focus.domain.vm.AuthorityVMS;
+import com.melo.focus.domain.vm.AuthoritySaveReq;
+import com.melo.focus.domain.vm.AuthorityReqs;
 import com.melo.focus.service.AuthorityService;
 import com.melo.focus.util.Constants;
 import com.melo.focus.util.Message;
@@ -40,8 +40,8 @@ public class AuthorityController {
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success") })
 	@RequiresPermissions(value={"authority_getAuthority","administrator"},logical=Logical.OR)
 	@RequestMapping(value="/authority",method=RequestMethod.GET)
-	public Message<List<AuthorityVMS>> getAuthority(){
-		List<AuthorityVMS> list=authorityService.getAuthority();
+	public Message<List<AuthorityReqs>> getAuthority(){
+		List<AuthorityReqs> list=authorityService.getAuthority();
 		return Message.ok(list);
 	}
 	
@@ -66,8 +66,8 @@ public class AuthorityController {
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success") })
 	@RequiresPermissions(value={"authority_saveAuthority","administrator"},logical=Logical.OR)
 	@RequestMapping(value="/authority",method=RequestMethod.POST)
-	public Message<String> saveAuthority(@RequestBody AuthoritySaveVM authoritySaveVM){
-		authorityService.saveAuthority(authoritySaveVM);
+	public Message<String> saveAuthority(@RequestBody AuthoritySaveReq authoritySaveReq){
+		authorityService.saveAuthority(authoritySaveReq);
 		return Message.ok(Constants.SUCCESS);
 	}
 	
@@ -78,8 +78,8 @@ public class AuthorityController {
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success") })
 	@RequiresPermissions(value={"authority_updateAuhtority","administrator"},logical=Logical.OR)
 	@RequestMapping(value="/authority",method=RequestMethod.PUT)
-	public Message<String> updateAuhtority(@RequestBody AuthorityUpdateVM authorityUpdateVM){
-		authorityService.updateAuhtority(authorityUpdateVM);
+	public Message<String> updateAuhtority(@RequestBody AuthorityUpdateReq authorityUpdateReq){
+		authorityService.updateAuhtority(authorityUpdateReq);
 		return Message.ok(Constants.SUCCESS);
 	}
 	

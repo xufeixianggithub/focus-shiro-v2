@@ -10,9 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.melo.focus.domain.basic.Authority;
 import com.melo.focus.domain.extend.AuthorityController;
-import com.melo.focus.domain.vm.AuthoritySaveVM;
-import com.melo.focus.domain.vm.AuthorityUpdateVM;
-import com.melo.focus.domain.vm.AuthorityVMS;
+import com.melo.focus.domain.vm.AuthoritySaveReq;
+import com.melo.focus.domain.vm.AuthorityUpdateReq;
+import com.melo.focus.domain.vm.AuthorityReqs;
 import com.melo.focus.mapper.basic.AuthorityMapper;
 import com.melo.focus.mapper.extend.AuthorityExtendMapper;
 import com.melo.focus.util.Asserts;
@@ -45,9 +45,9 @@ public class AuthorityService {
 	 * 按controller分组，得到authority列表
 	 * @return
 	 */
-	public List<AuthorityVMS> getAuthority() {
+	public List<AuthorityReqs> getAuthority() {
 		List<AuthorityController> authorityList = authorityExtendMapper.getAuthority();
-		return EntityUtils.entity2VMList(authorityList, AuthorityVMS.class);
+		return EntityUtils.entity2VMList(authorityList, AuthorityReqs.class);
 	}
 
 
@@ -57,19 +57,19 @@ public class AuthorityService {
 	}
 
 
-	public void saveAuthority(AuthoritySaveVM authoritySaveVM) {
-		Asserts.validate(authoritySaveVM,"authoritySaveVM");
-		Authority authority = EntityUtils.entity2VM(authoritySaveVM, Authority.class);
+	public void saveAuthority(AuthoritySaveReq authoritySaveReq) {
+		Asserts.validate(authoritySaveReq,"authoritySaveReq");
+		Authority authority = EntityUtils.entity2VM(authoritySaveReq, Authority.class);
 		authority.setId(UUID.randomUUID().toString());
 		authorityMapper.insert(authority);
 	}
 
 
-	public void updateAuhtority(AuthorityUpdateVM authorityUpdateVM) {
-		Asserts.validate(authorityUpdateVM, "authorityUpdateVM");
+	public void updateAuhtority(AuthorityUpdateReq authorityUpdateReq) {
+		Asserts.validate(authorityUpdateReq, "authorityUpdateReq");
 		//校验id是否存在
 		
-		Authority authority = EntityUtils.vm2Entity(authorityUpdateVM, Authority.class);
+		Authority authority = EntityUtils.vm2Entity(authorityUpdateReq, Authority.class);
 		authorityMapper.updateByPrimaryKey(authority);
 	}
 
